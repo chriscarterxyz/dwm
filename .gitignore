@@ -1,2 +1,8 @@
+
+# generated files
 *.o
 dwm
+
+# patch files
+*.orig
+*.rej
