@@ -15,17 +15,16 @@ static const char dmenufont[]       = "Jetbrains Mono NL:size=16";
 // static const char col_cyan[]        = "#005577";
 
 // everforest colors
-static const char col_ef_bg[]      	= "#2D353B";
-static const char col_ef_fg[]      	= "#D3C6AA";
-static const char col_ef_border[]   = "#859289";
-
-static const char col_ef_bg_dim[]	= "#232A2E";
-static const char col_ef_gray2[]	= "#9DA9A0";
+static const char col_ef_bg[]      	= "#000000";
+static const char col_ef_fg[]      	= "#f7f7f7";
+static const char col_ef_primary[]  = "#FFBE89";
+static const char col_ef_border[]   = "#252525";
+static const char col_ef_border2[]  = "#464646";
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_ef_gray2,	col_ef_bg_dim,  col_ef_border },
-	[SchemeSel]  = { col_ef_fg,   col_ef_bg,  col_ef_border  },
+	[SchemeNorm] = { col_ef_fg,	  col_ef_bg,  col_ef_border },
+	[SchemeSel]  = { col_ef_primary,   col_ef_bg,  col_ef_border2  },
 };
 
 /* tagging */
@@ -67,13 +66,14 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_ef_bg_dim, "-nf", col_ef_gray2, "-sb", col_ef_bg, "-sf", col_ef_fg, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = { "librewolf", NULL };
-static const char *bmccmd[] = { "bm", "-c", NULL }; // bookmark from clipboard
-static const char *bmtcmd[] = { "bm", "-t", NULL }; // type a bookmark 
+//static const char *bmccmd[] = { "bm", "-c", NULL }; // bookmark from clipboard
+//static const char *bmtcmd[] = { "bm", "-t", NULL }; // type a bookmark 
+static const char *getsnippetcmd[] = { "getsnippet", NULL }; // type a snippet 
 static const char *scrotscmd[] = { "scrot", "-s", "~/Photos/Screenshots/%Y-%m-%d_%H:%M:%S.png", NULL }; // screen capture 						  
-static const char *passmenucmd[] = { "passmenu", "-i", "-nb", col_ef_bg_dim, "-nf", col_ef_gray2, "-sb", col_ef_bg, "-sf", col_ef_fg, "-l", "30", NULL }; // password manager						  
+static const char *passmenucmd[] = { "passmenu", "-i", "-l", "30", NULL }; // password manager						  
 static const char *slockcmd[] = { "slock", NULL }; // screen lock 						  
 
 static const Key keys[] = {
@@ -86,8 +86,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
 
 	//{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_b,      spawn,          {.v = bmccmd } },
-	{ MODKEY,                       XK_Insert, spawn,          {.v = bmtcmd } },
+	//{ MODKEY,                       XK_b,      spawn,          {.v = bmccmd } },
+	{ MODKEY,                       XK_Insert, spawn,          {.v = getsnippetcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
