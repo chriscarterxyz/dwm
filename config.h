@@ -5,8 +5,8 @@ static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Jetbrains Mono NL:size=16" };
-static const char dmenufont[]       = "Jetbrains Mono NL:size=16";
+static const char *fonts[]          = { "Writer:size=16" };
+//static const char dmenufont[]       = "Writer:size=16";
 
 static char normbgcolor[]       	= "#222222";
 static char	normbordercolor[]       = "#444444";
@@ -59,15 +59,12 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "10",  NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *browsercmd[] = { "librewolf", NULL };
-//static const char *bmccmd[] = { "bm", "-c", NULL }; // bookmark from clipboard
-//static const char *bmtcmd[] = { "bm", "-t", NULL }; // type a bookmark 
-static const char *getsnippetcmd[] = { "getsnippet", NULL }; // type a snippet 
-static const char *scrotscmd[] = { "scrot", "-s", "~/Photos/Screenshots/%Y-%m-%d_%H:%M:%S.png", NULL }; // screen capture 						  
-static const char *passmenucmd[] = { "passmenu", "-i", "-l", "30", NULL }; // password manager						  
+static const char *browsercmd[] = { "firefox", NULL };
+static const char *passmenucmd[] = { "passmenu", "-i", "-l", "10", NULL }; // password manager
 static const char *slockcmd[] = { "slock", NULL }; // screen lock 						  
+
 /*
  * Xresources preferences to load at startup
  */
@@ -92,13 +89,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = browsercmd } },
-	{ MODKEY,                       XK_Print,  spawn,		   {.v = scrotscmd } },
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = passmenucmd } },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
 
 	//{ MODKEY,                       XK_b,      togglebar,      {0} },
-	//{ MODKEY,                       XK_b,      spawn,          {.v = bmccmd } },
-	{ MODKEY,                       XK_Insert, spawn,          {.v = getsnippetcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -124,10 +118,12 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 	TAGKEYS(                        XK_5,                      4)
+	/*
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+	*/
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 };
 
