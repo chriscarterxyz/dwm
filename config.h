@@ -5,8 +5,8 @@ static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Jetbrains Mono NL:size=16" };
-static const char dmenufont[]       = "Jetbrains Mono NL:size=16";
+static const char *fonts[]          = { "Writer:size=16" };
+//static const char dmenufont[]       = "Writer:size=16";
 
 static char normbgcolor[]       	= "#222222";
 static char	normbordercolor[]       = "#444444";
@@ -94,7 +94,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = browsercmd } },
-	{ MODKEY,                       XK_Print,  spawn,		   {.v = scrotscmd } },
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = passmenucmd } },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
 	{ MODKEY,                       XK_b,      spawn,          {.v = bluetooth_connect_cmd } },
