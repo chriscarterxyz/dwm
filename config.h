@@ -59,15 +59,17 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "10",  NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *browsercmd[] = { "librewolf", NULL };
-//static const char *bmccmd[] = { "bm", "-c", NULL }; // bookmark from clipboard
-//static const char *bmtcmd[] = { "bm", "-t", NULL }; // type a bookmark 
+static const char *browsercmd[] = { "firefox", NULL };
 static const char *getsnippetcmd[] = { "getsnippet", NULL }; // type a snippet 
 static const char *scrotscmd[] = { "scrot", "-s", "~/Photos/Screenshots/%Y-%m-%d_%H:%M:%S.png", NULL }; // screen capture 						  
-static const char *passmenucmd[] = { "passmenu", "-i", "-l", "30", NULL }; // password manager						  
+static const char *passmenucmd[] = { "passmenu", "-i", "-l", "10", NULL }; // password manager
+static const char *udiskiedmenucmd[] = { "udiskie-dmenu", "-i", "-l", "10", NULL }; // mount and unmount devices 
 static const char *slockcmd[] = { "slock", NULL }; // screen lock 						  
+static const char *bluetooth_connect_cmd[] = { "bt-dmenu", NULL }; // connect to a bluetooth device
+static const char *bluetooth_disconnect_cmd[] = { "bluetoothctl", "disconnect", NULL }; // disconnect from a bluetooth device
+
 /*
  * Xresources preferences to load at startup
  */
@@ -95,10 +97,12 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Print,  spawn,		   {.v = scrotscmd } },
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = passmenucmd } },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
+	{ MODKEY,                       XK_b,      spawn,          {.v = bluetooth_connect_cmd } },
+	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = bluetooth_disconnect_cmd } },
+	{ MODKEY,                       XK_Insert, spawn,          {.v = getsnippetcmd } },
+	{ MODKEY,              			XK_u,	   spawn,          {.v = udiskiedmenucmd } },
 
 	//{ MODKEY,                       XK_b,      togglebar,      {0} },
-	//{ MODKEY,                       XK_b,      spawn,          {.v = bmccmd } },
-	{ MODKEY,                       XK_Insert, spawn,          {.v = getsnippetcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -124,10 +128,12 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 	TAGKEYS(                        XK_5,                      4)
+	/*
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+	*/
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 };
 
