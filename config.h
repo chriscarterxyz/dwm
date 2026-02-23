@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -69,6 +70,8 @@ static const char *udiskiedmenucmd[] = { "udiskie-dmenu", "-i", "-l", "10", NULL
 static const char *slockcmd[] = { "slock", NULL }; // screen lock 						  
 static const char *bluetooth_connect_cmd[] = { "bt-dmenu", NULL }; // connect to a bluetooth device
 static const char *bluetooth_disconnect_cmd[] = { "bluetoothctl", "disconnect", NULL }; // disconnect from a bluetooth device
+static const char *brupcmd[] = { "brightnessctl", "set", "10%+", NULL };
+static const char *brdowncmd[] = { "brightnessctl", "set", "10%-", NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -122,6 +125,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = -1 } },
+    { 0, XF86XK_MonBrightnessUp,  spawn,          {.v = brupcmd} },
+    { 0, XF86XK_MonBrightnessDown, spawn,          {.v = brdowncmd} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
